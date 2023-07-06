@@ -1,18 +1,19 @@
 package cn.edu.whut.gumorming.service.impl;
 
+import cn.edu.whut.gumorming.constants.SystemConstants;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.Article;
 import cn.edu.whut.gumorming.domain.vo.TopArticleVo;
 import cn.edu.whut.gumorming.mapper.ArticleMapper;
 import cn.edu.whut.gumorming.service.ArticleService;
+import cn.edu.whut.gumorming.utils.BeanCopyUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * @author : GuMorming
@@ -31,7 +32,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult topArticleList() {
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
         // 非草稿
-        queryWrapper.eq(Article::getStatus, 0);
+        queryWrapper.eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL);
         // 按浏览量排序
         queryWrapper.orderByDesc(Article::getViewCount);
         // Top 10
@@ -39,12 +40,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         page(page, queryWrapper);
         List<Article> articles = page.getRecords();
         // bean拷贝
-        List<TopArticleVo> articleVos = new ArrayList<>();
-        for (Article article : articles) {
-            TopArticleVo vo = new TopArticleVo();
-            BeanUtils.copyProperties(article, vo);
-            articleVos.add(vo);
-        }
+        List<TopArticleVo> articleVos = BeanCopyUtils.copyBeanList(articles, TopArticleVo.class);
+//        List<TopArticleVo> articleVos = new ArrayList<>();
+//        for (Article article : articles) {
+//            TopArticleVo vo = new TopArticleVo();
+//            BeanUtils.copyProperties(article, vo);
+//            articleVos.add(vo);
+//        }
         // 封装
         return ResponseResult.okResult(articleVos);
     }
