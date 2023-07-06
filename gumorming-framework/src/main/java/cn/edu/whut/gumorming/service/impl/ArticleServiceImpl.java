@@ -40,13 +40,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         page(page, queryWrapper);
         List<Article> articles = page.getRecords();
         // bean拷贝
-        List<TopArticleVo> articleVos = BeanCopyUtils.copyBeanList(articles, TopArticleVo.class);
 //        List<TopArticleVo> articleVos = new ArrayList<>();
 //        for (Article article : articles) {
 //            TopArticleVo vo = new TopArticleVo();
 //            BeanUtils.copyProperties(article, vo);
 //            articleVos.add(vo);
 //        }
+        List<TopArticleVo> articleVos = BeanCopyUtils.copyBeanList(articles, TopArticleVo.class);
         // 封装
         return ResponseResult.okResult(articleVos);
     }
