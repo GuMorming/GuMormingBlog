@@ -33,7 +33,19 @@ public class ArticleController {
      */
     @GetMapping("/topArticleList")
     public ResponseResult topArticleList() {
-        ResponseResult result = articleService.topArticleList();
-        return result;
+        return articleService.topArticleList();
+    }
+    
+    /**
+     * 查询对应分类文章
+     *
+     * @param pageNum    当前页数
+     * @param pageSize
+     * @param categoryId
+     * @return ResponseResult
+     */
+    @GetMapping("/articleList")
+    public ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId) {
+        return articleService.articleList(pageNum, pageSize, categoryId);
     }
 }

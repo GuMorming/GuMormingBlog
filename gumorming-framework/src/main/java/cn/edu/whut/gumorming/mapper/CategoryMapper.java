@@ -2,6 +2,7 @@ package cn.edu.whut.gumorming.mapper;
 
 import cn.edu.whut.gumorming.domain.entity.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 
 /**
@@ -10,6 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author gumorming
  * @since 2023-07-06 22:09:45
  */
+@Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
 
 }
