@@ -16,7 +16,7 @@ spring:
       max-request-size: 5MB
   main:
     # 允许循环依赖
-    allow-circular-references: true
+    allow-circular-references: false
 
 mybatis-plus:
   configuration:

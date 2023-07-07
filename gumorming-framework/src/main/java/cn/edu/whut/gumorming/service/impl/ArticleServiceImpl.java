@@ -3,6 +3,8 @@ package cn.edu.whut.gumorming.service.impl;
 import cn.edu.whut.gumorming.constants.SystemConstants;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.Article;
+import cn.edu.whut.gumorming.domain.entity.Category;
+import cn.edu.whut.gumorming.domain.vo.ArticleDetailVo;
 import cn.edu.whut.gumorming.domain.vo.ArticleListVo;
 import cn.edu.whut.gumorming.domain.vo.PageVo;
 import cn.edu.whut.gumorming.domain.vo.TopArticleVo;
@@ -98,5 +100,27 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         
         
         return ResponseResult.okResult(pageVo);
+    }
+    
+    /**
+     * 根据文章Id查询文章
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult getArticleDetail(Long id) {
+        // 查询文章
+        Article article = getById(id);
+        // 封装Vo
+        ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
+        // 根据分类Id,获取文章内容
+        Long categoryId = articleDetailVo.getCategoryId();
+        Category category = categoryMapper.selectById(categoryId);
+        if (category != null) {
+            articleDetailVo.setCategoryName(category.getName());
+        }
+        
+        return ResponseResult.okResult(articleDetailVo);
     }
 }
