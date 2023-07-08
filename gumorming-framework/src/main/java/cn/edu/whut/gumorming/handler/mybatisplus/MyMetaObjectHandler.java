@@ -20,13 +20,13 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         Long userId = null;
-//        try {
-//            userId = SecurityUtils.getUserId();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            userId = -1L;//表示是注册
-//        }
-        userId = SecurityUtils.getUserId();
+        try {
+            userId = SecurityUtils.getUserId();
+        } catch (Exception e) {
+            e.printStackTrace();
+            userId = -1L;//表示是注册
+        }
+//        userId = SecurityUtils.getUserId();
         
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("createBy", userId, metaObject);
