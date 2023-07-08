@@ -16,6 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @MapperScan("cn.edu.whut.gumorming.mapper")
 @PropertySource("classpath:application-db.properties")
+@PropertySource("classpath:application-qiniu.properties")
 public class GuMormingBlogApplication {
     public static void main(String[] args) {
         SpringApplication.run(GuMormingBlogApplication.class, args);
