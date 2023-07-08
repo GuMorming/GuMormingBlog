@@ -34,4 +34,9 @@ public class SystemConstants {
      * 根评论用户状态位
      */
     public static final long COMMENT_ROOT_USER = -1L;
+    /**
+     * 评论类型
+     */
+    public static final String COMMENT_TYPE_ARTICLE = "0";
+    public static final String COMMENT_TYPE_LINK = "1";
 }

@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.controller;
 
+import cn.edu.whut.gumorming.constants.SystemConstants;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.Comment;
 import cn.edu.whut.gumorming.service.CommentService;
@@ -22,7 +23,12 @@ public class CommentController {
     
     @GetMapping("/commentList")
     public ResponseResult commentList(Integer pageNum, Integer pageSize, Long articleId) {
-        return commentService.commentList(pageNum, pageSize, articleId);
+        return commentService.commentList(SystemConstants.COMMENT_TYPE_ARTICLE, pageNum, pageSize, articleId);
+    }
+    
+    @GetMapping("/linkCommentList")
+    public ResponseResult linkCommentList(Integer pageNum, Integer pageSize) {
+        return commentService.commentList(SystemConstants.COMMENT_TYPE_LINK, pageNum, pageSize, null);
     }
     
     @PostMapping

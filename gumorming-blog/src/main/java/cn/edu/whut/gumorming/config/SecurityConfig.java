@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 登录接口 允许匿名访问
                         .requestMatchers("/login").anonymous()
+                        .requestMatchers("/user/userInfo").authenticated()
                         .requestMatchers("/logout").authenticated()
                         // 下一行用来测试异常处理
 //                        .requestMatchers("/link/getAllLink").authenticated()
