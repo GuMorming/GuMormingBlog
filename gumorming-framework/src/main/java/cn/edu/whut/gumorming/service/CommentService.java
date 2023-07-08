@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface CommentService extends IService<Comment> {
     
     ResponseResult commentList(Integer pageNum, Integer pageSize, Long articleId);
+    
+    ResponseResult addComment(Comment comment);
 }

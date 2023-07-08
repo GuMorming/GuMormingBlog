@@ -31,6 +31,7 @@ public class BeanCopyUtils {
         try {
             // 创建目标对象
             target = clazz.newInstance();
+//            target = clazz.getDeclaredConstructor().newInstance();
             //实现字段copy
             BeanUtils.copyProperties(source, target);
             

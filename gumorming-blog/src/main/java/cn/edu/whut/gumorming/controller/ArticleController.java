@@ -21,11 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
-
-//    @GetMapping("/list")
-//    public List<Article> test() {
-//        return articleService.list();
-//    }
+    
     
     /**
      * 查询热门文章

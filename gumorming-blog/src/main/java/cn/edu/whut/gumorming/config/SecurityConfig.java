@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,13 +49,12 @@ public class SecurityConfig {
                         .requestMatchers("/login").anonymous()
                         .requestMatchers("/logout").authenticated()
                         // 下一行用来测试异常处理
-                        .requestMatchers("/link/getAllLink").authenticated()
+//                        .requestMatchers("/link/getAllLink").authenticated()
                         // 除上面的所有请求不需要认证即可访问
                         .anyRequest().permitAll())
                 .logout(logout -> logout.disable())
                 //允许跨域
-                .cors(httpSecurityCorsConfigurer -> {
-                })
+                .cors(Customizer.withDefaults())
                 // 添加登录校验过滤器
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(handler -> handler
