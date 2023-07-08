@@ -26,4 +26,12 @@ public class SystemConstants {
      * 友链审核通过状态
      */
     public static final String LINK_STATUS_NORMAL = "0";
+    /**
+     * 根评论状态位
+     */
+    public static final long COMMENT_ROOT = -1L;
+    /**
+     * 根评论用户状态位
+     */
+    public static final long COMMENT_ROOT_USER = -1L;
 }

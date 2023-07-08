@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.service;
 
+import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-07-07 19:44:01
  */
 public interface CommentService extends IService<Comment> {
-
+    
+    ResponseResult commentList(Integer pageNum, Integer pageSize, Long articleId);
 }
