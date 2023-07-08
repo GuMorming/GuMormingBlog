@@ -1,11 +1,10 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.domain.ResponseResult;
+import cn.edu.whut.gumorming.domain.entity.User;
 import cn.edu.whut.gumorming.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : GuMorming
@@ -24,5 +23,10 @@ public class UserController {
     @GetMapping("/userInfo")
     public ResponseResult getUserInfo() {
         return userService.getUserInfo();
+    }
+    
+    @PutMapping("/userInfo")
+    public ResponseResult updateUserInfo(@RequestBody User user) {
+        return userService.updateUserInfo(user);
     }
 }

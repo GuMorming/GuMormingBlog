@@ -30,4 +30,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         
         return ResponseResult.okResult(userInfoVo);
     }
+    
+    @Override
+    public ResponseResult updateUserInfo(User user) {
+        updateById(user);
+        // TODO 用update()方法指定更新的列
+        return ResponseResult.okResult();
+    }
 }

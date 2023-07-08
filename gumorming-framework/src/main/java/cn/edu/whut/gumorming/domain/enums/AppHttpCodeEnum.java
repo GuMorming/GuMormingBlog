@@ -15,6 +15,7 @@ public enum AppHttpCodeEnum {
     EMAIL_EXIST(503, "邮箱已存在"),
     REQUIRE_USERNAME(504, "必须填写用户名"),
     LOGIN_ERROR(505, "用户名或密码错误"),
+    UPDATE_TYPE_ERROR(507, "上传图片类型须为png"),
     COMMENT_CONTENT_NOT_NULL(506, "评论内容不能为空");
     
     int code;
