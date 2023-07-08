@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.controller;
 
+import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.User;
 import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
@@ -25,6 +26,7 @@ public class BlogLoginController {
     private BlogLoginService blogLoginService;
     
     @PostMapping("/login")
+    @SystemLog("登录")
     public ResponseResult login(@RequestBody User user) {
         if (!StringUtils.hasText(user.getUserName())) {
             // 异常 必须要传用户名
@@ -34,6 +36,7 @@ public class BlogLoginController {
     }
     
     @PostMapping("/logout")
+    @SystemLog("注销登录")
     public ResponseResult logout() {
         return blogLoginService.logout();
     }

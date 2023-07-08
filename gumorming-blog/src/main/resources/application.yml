@@ -14,14 +14,36 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 5MB
-  main:
-    # 允许循环依赖
-    allow-circular-references: false
+
+
+# 日志配置
+logging:
+  # 日志级别
+  level:
+    root: info
+  file:
+    # 日志文件名格式
+    name: /logs/${spring.application.name}.log
+  pattern:
+    # 日志记录格式[时间戳] [日志级别] [类名.方法名] [消息文本]
+    file: GuMormingBlog %d{yyyy-MM-dd HH:mm:ss.SSS} %p %C.%M %m %n
+  logback:
+    rollingpolicy:
+      # 根据文件大小归档，超过2KB自动归档，次日启动服务时也会自动归档
+      file-name-pattern: /logs/%d{yyyyMMdd}/${spring.application.name}.out.log.%d{yyyy-MM-dd}.%i.gz
+      # 最大日志文件大小(默认为10MB，这里为了测试归档，暂时设置为2KB)
+      max-file-size: 2KB
+      # 要保留的日志备份的总大小(默认为0B)
+      total-size-cap: 1GB
+      # 保存存档日志文件的最大天数(默认为7天)
+      max-history: 7
+
 
 mybatis-plus:
-  configuration:
-    # 日志
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #  configuration:
+  # 日志
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
   global-config:
     db-config:
       # 逻辑删除字段名

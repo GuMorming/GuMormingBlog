@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.controller;
 
+import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class UploadController {
     private UploadService uploadService;
     
     @PostMapping("/upload")
-    public ResponseResult uploadImg(MultipartFile img) {
+    @SystemLog("上传头像")
+    public ResponseResult uploadAvatar(MultipartFile img) {
         return uploadService.uploadImg(img);
     }
 }

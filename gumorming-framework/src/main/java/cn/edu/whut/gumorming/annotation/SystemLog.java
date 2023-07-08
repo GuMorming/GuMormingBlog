@@ -16,5 +16,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface SystemLog {
-    String businessName();
+    /**
+     * @return 业务流程名
+     */
+    String value();
 }

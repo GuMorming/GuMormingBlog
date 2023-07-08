@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.controller;
 
+import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class ArticleController {
     }
     
     @GetMapping("/{id}")
+    @SystemLog("获取文章详情")
     public ResponseResult getArticleDetail(@PathVariable("id") Long id) {
         return articleService.getArticleDetail(id);
     }
