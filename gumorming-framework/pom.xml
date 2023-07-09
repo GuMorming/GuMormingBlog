@@ -96,6 +96,17 @@
             <artifactId>qiniu-java-sdk</artifactId>
             <version>[7.13.0, 7.13.99]</version>
         </dependency>
+        <!-- Dev Tools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <!--java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
     </dependencies>
 
 </project>

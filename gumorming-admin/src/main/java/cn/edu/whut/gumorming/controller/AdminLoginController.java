@@ -5,7 +5,7 @@ import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.User;
 import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
 import cn.edu.whut.gumorming.exception.SystemException;
-import cn.edu.whut.gumorming.service.BlogLoginService;
+import cn.edu.whut.gumorming.service.AdminLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,28 +16,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author : GuMorming
  * @Project : GuMormingBlog
  * @Package : cn.edu.whut.gumorming.controller
- * @createTime : 2023/7/7 14:19
+ * @createTime : 2023/7/9 16:14
  * @Email : gumorming@163.com
  * @Description :
  */
 @RestController
-public class BlogLoginController {
+public class AdminLoginController {
     @Autowired
-    private BlogLoginService blogLoginService;
+    private AdminLoginService adminLoginService;
     
-    @PostMapping("/login")
-    @SystemLog("博客登录")
-    public ResponseResult login(@RequestBody User user) {
+    @PostMapping("/user/login")
+    @SystemLog("后台登录")
+    public ResponseResult adminLogin(@RequestBody User user) {
         if (!StringUtils.hasText(user.getUserName())) {
             // 异常 必须要传用户名
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
         }
-        return blogLoginService.login(user);
+        return adminLoginService.login(user);
     }
     
-    @PostMapping("/logout")
-    @SystemLog("博客注销登录")
+    @PostMapping("/user/logout")
+    @SystemLog("后台注销登录")
     public ResponseResult logout() {
-        return blogLoginService.logout();
+        return adminLoginService.logout();
     }
 }

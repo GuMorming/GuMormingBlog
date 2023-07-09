@@ -4,10 +4,8 @@ import cn.edu.whut.gumorming.constants.SystemConstants;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.LoginUser;
 import cn.edu.whut.gumorming.domain.entity.User;
-import cn.edu.whut.gumorming.domain.vo.BlogLoginUserVo;
-import cn.edu.whut.gumorming.domain.vo.UserInfoVo;
-import cn.edu.whut.gumorming.service.BlogLoginService;
-import cn.edu.whut.gumorming.utils.BeanCopyUtils;
+import cn.edu.whut.gumorming.domain.vo.AdminLoginUserVo;
+import cn.edu.whut.gumorming.service.AdminLoginService;
 import cn.edu.whut.gumorming.utils.JwtUtil;
 import cn.edu.whut.gumorming.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +21,12 @@ import java.util.Objects;
  * @author : GuMorming
  * @Project : GuMormingBlog
  * @Package : cn.edu.whut.gumorming.service.impl
- * @createTime : 2023/7/7 14:21
+ * @createTime : 2023/7/9 16:20
  * @Email : gumorming@163.com
  * @Description :
  */
-@Service("blogLoginService")
-public class BlogLoginServiceImpl implements BlogLoginService {
+@Service("adminLoginService")
+public class AdminLoginServiceImpl implements AdminLoginService {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -48,19 +46,13 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
         // 用户信息存入redis
-        redisCache.setCacheObject(SystemConstants.REDIS_KEY_PREFIX_BLOG_LOGIN + userId, loginUser);
-        // token和userinfo封装,返回
-        UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
-        BlogLoginUserVo vo = new BlogLoginUserVo(jwt, userInfoVo);
+        redisCache.setCacheObject(SystemConstants.REDIS_KEY_PREFIX_ADMIN_LOGIN + userId, loginUser);
+        // token封装,返回
+        AdminLoginUserVo vo = new AdminLoginUserVo(jwt);
         
         return ResponseResult.okResult(vo);
     }
     
-    /**
-     * 登出, 删除Redis中的用户信息
-     *
-     * @return
-     */
     @Override
     public ResponseResult logout() {
         // 获取token
