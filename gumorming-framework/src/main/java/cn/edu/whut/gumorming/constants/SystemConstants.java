@@ -11,6 +11,13 @@ package cn.edu.whut.gumorming.constants;
 
 public class SystemConstants {
     /**
+     * JWT
+     */
+    //有效期为
+    public static final Long JWT_TTL = 1 * 60 * 60 * 1000L;// 60 * 60 *1000  一个小时
+    //设置秘钥明文 TODO 不能为9字节?
+    public static final String JWT_KEY = "gumorming1";
+    /**
      * 文章是草稿
      */
     public static final int ARTICLE_STATUS_DRAFT = 1;
@@ -19,13 +26,9 @@ public class SystemConstants {
      */
     public static final int ARTICLE_STATUS_NORMAL = 0;
     /**
-     * 分类是正常状态
+     * 分类,友链,菜单 是正常状态
      */
-    public static final String CATEGORY_STATUS_NORMAL = "0";
-    /**
-     * 友链审核通过状态
-     */
-    public static final String LINK_STATUS_NORMAL = "0";
+    public static final String STATUS_NORMAL = "0";
     /**
      * 根评论状态位
      */
@@ -45,4 +48,13 @@ public class SystemConstants {
      */
     public static final String REDIS_KEY_PREFIX_ADMIN_LOGIN = "adminlogin:";
     public static final String REDIS_KEY_PREFIX_BLOG_LOGIN = "bloglogin:";
+    /**
+     * 菜单类型
+     */
+    // 目录
+    public static final String MENU_TYPE_MULU = "M";
+    // 菜单
+    public static final String MENU_TYPE_CAIDAN = "C";
+    // 按钮
+    public static final String MENU_TYPE_BUTTON = "F";
 }

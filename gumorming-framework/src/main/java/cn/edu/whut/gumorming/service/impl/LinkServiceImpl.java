@@ -26,7 +26,7 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
     public ResponseResult getAllLink() {
         LambdaQueryWrapper<Link> queryWrapper = new LambdaQueryWrapper<>();
         // 查询所有审核通过的友链
-        queryWrapper.eq(Link::getStatus, SystemConstants.LINK_STATUS_NORMAL);
+        queryWrapper.eq(Link::getStatus, SystemConstants.STATUS_NORMAL);
         List<Link> links = list(queryWrapper);
         // 封装VO
         List<LinkVo> linkVos = BeanCopyUtils.copyBeanList(links, LinkVo.class);

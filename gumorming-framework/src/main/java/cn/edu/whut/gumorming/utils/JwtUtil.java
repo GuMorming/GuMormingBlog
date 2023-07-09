@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.utils;
 
+import cn.edu.whut.gumorming.constants.SystemConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -15,11 +16,6 @@ import java.util.UUID;
  * JWT工具类
  */
 public class JwtUtil {
-    
-    //有效期为
-    public static final Long JWT_TTL = 2 * 60 * 60 * 1000L;// 60 * 60 *1000  一个小时
-    //设置秘钥明文 TODO 不能为9字节?
-    public static final String JWT_KEY = "gumorming1";
     
     public static String getUUID() {
         String token = UUID.randomUUID().toString().replaceAll("-", "");
@@ -55,7 +51,7 @@ public class JwtUtil {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         if (ttlMillis == null) {
-            ttlMillis = JwtUtil.JWT_TTL;
+            ttlMillis = SystemConstants.JWT_TTL;
         }
         long expMillis = nowMillis + ttlMillis;
         Date expDate = new Date(expMillis);
@@ -93,7 +89,7 @@ public class JwtUtil {
      * @return
      */
     public static SecretKey generalKey() {
-        byte[] encodedKey = Base64.getDecoder().decode(JwtUtil.JWT_KEY);
+        byte[] encodedKey = Base64.getDecoder().decode(SystemConstants.JWT_KEY);
         SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
         return key;
     }

@@ -19,7 +19,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+@Accessors(chain = true) // 链式编程, setter 返回值为自身
 public class Article {
     private Long id;
     //标题
