@@ -1,0 +1,28 @@
+server:
+  port: ${ADMIN_PORT:8989}
+
+spring:
+  application:
+    name: ${APP_NAME:GuMorming's Blog Admin}
+  datasource:
+    driver-class-name: ${jdbc.driver}
+    url: ${jdbc.url}
+    username: ${jdbc.username}
+    password: ${jdbc.password}
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+
+mybatis-plus:
+  configuration:
+    #       日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 逻辑删除字段名
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
