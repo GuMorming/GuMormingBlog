@@ -1,5 +1,6 @@
 package cn.edu.whut.gumorming.filter;
 
+import cn.edu.whut.gumorming.constants.SystemConstants;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.LoginUser;
 import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
@@ -58,7 +59,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         String userId = claims.getSubject();
         // 从Redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject("bloglogin:" + userId);
+        LoginUser loginUser = redisCache.getCacheObject(SystemConstants.REDIS_KEY_PREFIX_BLOG_LOGIN + userId);
         // 如果获取不到
         if (Objects.isNull(loginUser)) {
             // 登录过期，提示重新登录
