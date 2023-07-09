@@ -39,4 +39,5 @@ public class SystemConstants {
      */
     public static final String COMMENT_TYPE_ARTICLE = "0";
     public static final String COMMENT_TYPE_LINK = "1";
+    public static final String REDIS_ARTICLE_VIEWCOUNT = "article:viewCount";
 }

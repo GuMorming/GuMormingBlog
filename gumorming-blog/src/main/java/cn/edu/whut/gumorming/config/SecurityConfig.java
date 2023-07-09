@@ -28,6 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 public class SecurityConfig {
+    
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
@@ -36,6 +37,14 @@ public class SecurityConfig {
     AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
     AccessDeniedHandler accessDeniedHandler;
+    
+    private static final String[] SWAGGER_WHITELIST = {
+            "/api/v1/auth/**"
+            , "/v3/api-docs/**"
+            , "/v3/api-docs.yaml"
+            , "/swagger-ui/**"
+            , "/swagger-ui.html"
+    };
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -48,11 +57,12 @@ public class SecurityConfig {
                         // 登录接口 允许匿名访问
                         .requestMatchers("/login").anonymous()
                         .requestMatchers("/user/userInfo").authenticated()
-//                        .requestMatchers("/upload").authenticated()
+                        .requestMatchers("/upload").authenticated()
                         .requestMatchers("/logout").authenticated()
                         // 下一行用来测试异常处理
 //                        .requestMatchers("/link/getAllLink").authenticated()
                         // 除上面的所有请求不需要认证即可访问
+//                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .anyRequest().permitAll())
                 .logout(logout -> logout.disable())
                 //允许跨域

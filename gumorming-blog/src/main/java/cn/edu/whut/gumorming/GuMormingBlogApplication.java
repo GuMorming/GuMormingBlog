@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author : GuMorming
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @SpringBootApplication
 @MapperScan("cn.edu.whut.gumorming.mapper")
+@EnableScheduling
 @PropertySource("classpath:application-db.properties")
 @PropertySource("classpath:application-qiniu.properties")
 public class GuMormingBlogApplication {

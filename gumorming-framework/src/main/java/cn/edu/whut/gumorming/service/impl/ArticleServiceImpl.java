@@ -12,6 +12,7 @@ import cn.edu.whut.gumorming.mapper.ArticleMapper;
 import cn.edu.whut.gumorming.mapper.CategoryMapper;
 import cn.edu.whut.gumorming.service.ArticleService;
 import cn.edu.whut.gumorming.utils.BeanCopyUtils;
+import cn.edu.whut.gumorming.utils.RedisCache;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -35,6 +36,8 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private RedisCache redisCache;
     
     /**
      * 查询热门文章, 封装成ResponseResult返回
@@ -112,6 +115,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult getArticleDetail(Long id) {
         // 查询文章
         Article article = getById(id);
+        // 从Redis中获取浏览量
+        Integer viewCount = redisCache.getCacheMapValue(SystemConstants.REDIS_ARTICLE_VIEWCOUNT, id.toString());
+        article.setViewCount(viewCount.longValue());
         // 封装Vo
         ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
         // 根据分类Id,获取文章内容
@@ -120,7 +126,16 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (category != null) {
             articleDetailVo.setCategoryName(category.getName());
         }
+        // 从Redis中获取当前文章的浏览量
         
         return ResponseResult.okResult(articleDetailVo);
+    }
+    
+    @Override
+    public ResponseResult updateArticleViewCount(Long id) {
+        // 更新Redis浏览量 +1
+        redisCache.incrementCacheMapValue(SystemConstants.REDIS_ARTICLE_VIEWCOUNT, id.toString(), 1);
+        
+        return ResponseResult.okResult();
     }
 }

@@ -3,11 +3,10 @@ package cn.edu.whut.gumorming.controller;
 import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.service.ArticleService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : GuMorming
@@ -17,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @Email : gumorming@163.com
  * @Description :
  */
+
 @RestController
 @RequestMapping("/article")
+@Tag(name = "ArticleController", description = "文章相关接口")
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
@@ -30,6 +31,7 @@ public class ArticleController {
      * @return ResponseResult
      */
     @GetMapping("/topArticleList")
+    @Operation(summary = "topArticleList", description = "获取Top文章")
     public ResponseResult topArticleList() {
         return articleService.topArticleList();
     }
@@ -52,4 +54,11 @@ public class ArticleController {
     public ResponseResult getArticleDetail(@PathVariable("id") Long id) {
         return articleService.getArticleDetail(id);
     }
+    
+    @PutMapping("/updateViewCount/{id}")
+    @SystemLog("更新浏览量")
+    public ResponseResult updateArticleViewCount(@PathVariable("id") Long id) {
+        return articleService.updateArticleViewCount(id);
+    }
+    
 }
