@@ -1,6 +1,7 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.domain.ResponseResult;
+import cn.edu.whut.gumorming.domain.vo.PageVo;
 import cn.edu.whut.gumorming.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class LinkController {
     private LinkService linkService;
     
     @GetMapping("/list")
-    public ResponseResult tagList() {
-        return ResponseResult.okResult(linkService.list());
+    public ResponseResult<PageVo> linkList(Integer pageNum, Integer pageSize) {
+        return linkService.pageLinkList(pageNum, pageSize);
     }
 }

@@ -1,11 +1,13 @@
 package cn.edu.whut.gumorming.controller;
 
+import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.domain.ResponseResult;
+import cn.edu.whut.gumorming.domain.dto.TagListDto;
+import cn.edu.whut.gumorming.domain.entity.Tag;
+import cn.edu.whut.gumorming.domain.vo.PageVo;
 import cn.edu.whut.gumorming.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : GuMorming
@@ -21,8 +23,20 @@ public class TagController {
     @Autowired
     private TagService tagService;
     
+    /**
+     * 查询标签列表
+     * query参数
+     *
+     * @return
+     */
     @GetMapping("/list")
-    public ResponseResult tagList() {
-        return ResponseResult.okResult(tagService.list());
+    @SystemLog("后台获取标签列表")
+    public ResponseResult<PageVo> tagList(Integer pageNum, Integer pageSize, TagListDto tagListDto) {
+        return tagService.pageTagList(pageNum, pageSize, tagListDto);
+    }
+    
+    @PostMapping("/addTag")
+    public ResponseResult addTag(@RequestBody Tag tag) {
+        return tagService.addTag(tag);
     }
 }

@@ -22,7 +22,8 @@ public enum AppHttpCodeEnum {
     REGISTER_USERNAME_NULL(508, "用户名不能为空"),
     REGISTER_PASSWORD_NULL(509, "密码不能为空"),
     REGISTER_NICKNAME_NULL(510, "昵称不能为空"),
-    REGISTER_EMAIL_NULL(511, "邮箱不能为空");
+    REGISTER_EMAIL_NULL(511, "邮箱不能为空"),
+    TAG_NAME_NOT_NULL(512, "标签名不能为空");
     
     
     int code;

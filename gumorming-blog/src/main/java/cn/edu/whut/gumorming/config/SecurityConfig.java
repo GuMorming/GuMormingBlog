@@ -59,10 +59,7 @@ public class SecurityConfig {
                         .requestMatchers("/user/userInfo").authenticated()
                         .requestMatchers("/upload").authenticated()
                         .requestMatchers("/logout").authenticated()
-                        // 下一行用来测试异常处理
-//                        .requestMatchers("/link/getAllLink").authenticated()
                         // 除上面的所有请求不需要认证即可访问
-//                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .anyRequest().permitAll())
                 .logout(logout -> logout.disable())
                 //允许跨域

@@ -38,7 +38,20 @@ public class AdminSecurityConfig {
     AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
     AccessDeniedHandler accessDeniedHandler;
-    
+    private static final String[] SWAGGER_WHITELIST = {
+            "/api/v1/auth/**"
+            , "/v3/api-docs/**"
+            , "/v3/api-docs.yaml"
+            , "/swagger-ui/**"
+            , "/swagger-ui.html"
+    };
+    private final String[] KNIFE4J_WHITELIST = {
+            "/webjars/"
+            , "/webjars/**"
+            , "/doc.html/"
+            , "/doc.html#/"
+            , "/doc.html/**"
+    };
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -50,8 +63,11 @@ public class AdminSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 登录接口 允许匿名访问
                         .requestMatchers("/user/login").anonymous()
+                        .requestMatchers(SWAGGER_WHITELIST).anonymous()
+                        .requestMatchers(KNIFE4J_WHITELIST).anonymous()
                         // 除登录接口皆须认证
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                )
                 .logout(AbstractHttpConfigurer::disable)
                 //允许跨域
                 .cors(Customizer.withDefaults())

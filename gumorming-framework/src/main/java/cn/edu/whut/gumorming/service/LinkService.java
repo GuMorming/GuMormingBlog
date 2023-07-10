@@ -2,6 +2,7 @@ package cn.edu.whut.gumorming.service;
 
 import cn.edu.whut.gumorming.domain.ResponseResult;
 import cn.edu.whut.gumorming.domain.entity.Link;
+import cn.edu.whut.gumorming.domain.vo.PageVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 
@@ -13,6 +14,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 
 public interface LinkService extends IService<Link> {
+    
+    
+    ResponseResult<PageVo> pageLinkList(Integer pageNum, Integer pageSize);
     
     ResponseResult getAllLink();
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -26,12 +27,17 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
             e.printStackTrace();
             userId = -1L;//表示是注册
         }
-//        userId = SecurityUtils.getUserId();
-        
-        this.setFieldValByName("createTime", new Date(), metaObject);
-        this.setFieldValByName("createBy", userId, metaObject);
-        this.setFieldValByName("updateTime", new Date(), metaObject);
-        this.setFieldValByName("updateBy", userId, metaObject);
+//        this.setFieldValByName("createTime", new Date(), metaObject);
+        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+
+//        this.setFieldValByName("createBy", userId, metaObject);
+        this.strictInsertFill(metaObject, "createBy", Long.class, userId);
+
+//        this.setFieldValByName("updateTime", new Date(), metaObject);
+        this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+
+//        this.setFieldValByName("updateBy", userId, metaObject);
+        this.strictInsertFill(metaObject, "updateBy", Long.class, userId);
     }
     
     /**
