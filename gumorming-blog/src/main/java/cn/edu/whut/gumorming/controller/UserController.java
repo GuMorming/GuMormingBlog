@@ -2,7 +2,7 @@ package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.entity.User;
-import cn.edu.whut.gumorming.model.dto.UserInfoDTO;
+import cn.edu.whut.gumorming.model.dto.user.UserInfoDTO;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

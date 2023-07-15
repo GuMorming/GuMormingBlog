@@ -1,4 +1,4 @@
-package cn.edu.whut.gumorming.model.dto;
+package cn.edu.whut.gumorming.model.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

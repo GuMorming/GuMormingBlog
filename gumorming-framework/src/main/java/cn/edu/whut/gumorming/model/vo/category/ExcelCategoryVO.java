@@ -1,4 +1,4 @@
-package cn.edu.whut.gumorming.model.vo;
+package cn.edu.whut.gumorming.model.vo.category;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.AllArgsConstructor;

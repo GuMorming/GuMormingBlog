@@ -4,7 +4,7 @@ import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.entity.User;
 import cn.edu.whut.gumorming.enums.HttpCodeEnum;
 import cn.edu.whut.gumorming.exception.SystemException;
-import cn.edu.whut.gumorming.model.dto.RegisterDTO;
+import cn.edu.whut.gumorming.model.dto.user.RegisterDTO;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.BlogLoginService;
 import io.swagger.v3.oas.annotations.Operation;

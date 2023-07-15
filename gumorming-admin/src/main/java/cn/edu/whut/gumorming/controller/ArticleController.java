@@ -1,8 +1,8 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
-import cn.edu.whut.gumorming.model.dto.QueryArticleDto;
 import cn.edu.whut.gumorming.model.dto.article.AdminAddArticleDTO;
+import cn.edu.whut.gumorming.model.dto.article.QueryArticleDto;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;

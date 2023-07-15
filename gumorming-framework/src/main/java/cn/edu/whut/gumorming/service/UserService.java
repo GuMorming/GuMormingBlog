@@ -1,11 +1,11 @@
 package cn.edu.whut.gumorming.service;
 
 import cn.edu.whut.gumorming.entity.User;
-import cn.edu.whut.gumorming.model.dto.UserInfoDTO;
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
 import cn.edu.whut.gumorming.model.dto.user.AdminAddUserDTO;
 import cn.edu.whut.gumorming.model.dto.user.AdminUpdateUserDTO;
-import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.dto.user.UserInfoDTO;
+import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 

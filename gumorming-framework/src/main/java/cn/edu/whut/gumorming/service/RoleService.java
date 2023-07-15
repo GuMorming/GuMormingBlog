@@ -1,9 +1,9 @@
 package cn.edu.whut.gumorming.service;
 
 import cn.edu.whut.gumorming.entity.Role;
-import cn.edu.whut.gumorming.model.dto.AddRoleDto;
-import cn.edu.whut.gumorming.model.dto.QueryRoleDto;
-import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.dto.role.AddRoleDto;
+import cn.edu.whut.gumorming.model.dto.role.QueryRoleDto;
+import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 

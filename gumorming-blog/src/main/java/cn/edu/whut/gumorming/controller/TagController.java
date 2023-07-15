@@ -1,9 +1,9 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
-import cn.edu.whut.gumorming.model.vo.PageVo;
 import cn.edu.whut.gumorming.model.vo.TagVo;
 import cn.edu.whut.gumorming.model.vo.article.ArticleCardVO;
+import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;

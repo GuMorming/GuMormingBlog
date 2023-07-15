@@ -3,7 +3,7 @@ package cn.edu.whut.gumorming.controller;
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
 import cn.edu.whut.gumorming.model.dto.user.AdminAddUserDTO;
 import cn.edu.whut.gumorming.model.dto.user.AdminUpdateUserDTO;
-import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

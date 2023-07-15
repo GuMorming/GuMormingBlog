@@ -1,24 +1,24 @@
-package cn.edu.whut.gumorming.model.vo;
+package cn.edu.whut.gumorming.model.vo.article;
 
-import cn.edu.whut.gumorming.entity.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * @author : GuMorming
  * @Project : GuMormingBlog
  * @Package : cn.edu.whut.gumorming.domain.vo
- * @createTime : 2023/7/9 20:22
+ * @createTime : 2023/7/6 20:40
  * @Email : gumorming@163.com
  * @Description :
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RouterVo {
-    private List<Menu> menus;
-    
+public class TopArticleVo {
+    private Long id;
+    // 标题
+    private String title;
+    //访问量
+    private Long viewCount;
 }

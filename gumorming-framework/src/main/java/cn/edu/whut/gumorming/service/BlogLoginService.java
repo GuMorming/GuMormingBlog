@@ -1,7 +1,7 @@
 package cn.edu.whut.gumorming.service;
 
 import cn.edu.whut.gumorming.entity.User;
-import cn.edu.whut.gumorming.model.dto.RegisterDTO;
+import cn.edu.whut.gumorming.model.dto.user.RegisterDTO;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 
 /**

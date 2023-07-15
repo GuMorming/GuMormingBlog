@@ -1,11 +1,11 @@
 package cn.edu.whut.gumorming.service;
 
 import cn.edu.whut.gumorming.entity.Category;
-import cn.edu.whut.gumorming.model.dto.AdminUpdateCategoryDTO;
+import cn.edu.whut.gumorming.model.dto.category.AdminUpdateCategoryDTO;
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
-import cn.edu.whut.gumorming.model.vo.PageVo;
 import cn.edu.whut.gumorming.model.vo.article.ArticleCardVO;
 import cn.edu.whut.gumorming.model.vo.category.CategoryVO;
+import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jakarta.servlet.http.HttpServletResponse;

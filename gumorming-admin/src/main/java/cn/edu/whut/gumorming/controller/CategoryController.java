@@ -2,9 +2,9 @@ package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.entity.Category;
-import cn.edu.whut.gumorming.model.dto.AdminUpdateCategoryDTO;
+import cn.edu.whut.gumorming.model.dto.category.AdminUpdateCategoryDTO;
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
-import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.CategoryService;
 import jakarta.servlet.http.HttpServletResponse;

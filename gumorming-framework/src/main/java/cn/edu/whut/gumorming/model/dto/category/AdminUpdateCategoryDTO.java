@@ -1,4 +1,4 @@
-package cn.edu.whut.gumorming.model.dto;
+package cn.edu.whut.gumorming.model.dto.category;
 
 import lombok.Data;
 

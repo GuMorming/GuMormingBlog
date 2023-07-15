@@ -1,5 +1,6 @@
-package cn.edu.whut.gumorming.model.vo;
+package cn.edu.whut.gumorming.model.vo.user;
 
+import cn.edu.whut.gumorming.model.vo.UserInfoVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
