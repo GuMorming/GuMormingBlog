@@ -1,13 +1,15 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.dto.TagListDto;
-import cn.edu.whut.gumorming.domain.entity.Tag;
-import cn.edu.whut.gumorming.domain.vo.PageVo;
+import cn.edu.whut.gumorming.entity.Tag;
+import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
+import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : GuMorming
@@ -30,13 +32,46 @@ public class TagController {
      * @return
      */
     @GetMapping("/list")
-    @SystemLog("后台获取标签列表")
-    public ResponseResult<PageVo> tagList(Integer pageNum, Integer pageSize, TagListDto tagListDto) {
-        return tagService.pageTagList(pageNum, pageSize, tagListDto);
+    @SystemLog("后台获取分页标签列表")
+    public ResponseResult<PageVo> tagList(GetParamsDTO getParamsDTO) {
+        return tagService.pageTagList(getParamsDTO);
     }
     
-    @PostMapping("/addTag")
+    /**
+     * 根据tag id获取信息
+     *
+     * @param id pathVariable
+     * @return
+     */
+    @GetMapping("/{id}")
+    @SystemLog("后台根据id获取标签信息")
+    public ResponseResult getTagInfoById(@PathVariable Long id) {
+        return tagService.getTagInfoById(id);
+    }
+    
+    @GetMapping("/listAllTag")
+    @SystemLog("后台获取标签列表")
+    public ResponseResult getTagList() {
+        return tagService.getTagList();
+    }
+    
+    @PutMapping
+    @SystemLog("后台修改标签")
+    public ResponseResult updateTagInfoById(@RequestBody Tag tag) {
+        return tagService.updateTagInfoById(tag);
+    }
+    
+    @PostMapping
+    @SystemLog("后台添加标签")
     public ResponseResult addTag(@RequestBody Tag tag) {
         return tagService.addTag(tag);
     }
+    
+    
+    @DeleteMapping("/{id}")
+    @SystemLog("后台删除标签")
+    public ResponseResult deleteTag(@PathVariable("id") List<Long> id) {
+        return tagService.deleteTag(id);
+    }
+    
 }

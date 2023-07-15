@@ -1,7 +1,8 @@
 package cn.edu.whut.gumorming.service;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author : GuMorming
@@ -13,5 +14,5 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 public interface UploadService {
-    ResponseResult uploadImg(MultipartFile img);
+    String uploadImg(MultipartFile img) throws IOException;
 }

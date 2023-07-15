@@ -1,7 +1,8 @@
 package cn.edu.whut.gumorming.service;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.entity.User;
+import cn.edu.whut.gumorming.entity.User;
+import cn.edu.whut.gumorming.model.dto.RegisterDTO;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 
 /**
  * @author : GuMorming
@@ -16,4 +17,8 @@ public interface BlogLoginService {
     ResponseResult login(User user);
     
     ResponseResult logout();
+    
+    ResponseResult<?> sendCode(String username);
+    
+    ResponseResult register(RegisterDTO registerDTO);
 }

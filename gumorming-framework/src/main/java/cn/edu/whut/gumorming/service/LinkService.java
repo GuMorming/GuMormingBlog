@@ -1,9 +1,12 @@
 package cn.edu.whut.gumorming.service;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.entity.Link;
-import cn.edu.whut.gumorming.domain.vo.PageVo;
+import cn.edu.whut.gumorming.entity.Link;
+import cn.edu.whut.gumorming.model.dto.QueryLinkDto;
+import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 
 /**
@@ -16,7 +19,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface LinkService extends IService<Link> {
     
     
-    ResponseResult<PageVo> pageLinkList(Integer pageNum, Integer pageSize);
+    ResponseResult<PageVo> pageLinkList(Integer pageNum, Integer pageSize, QueryLinkDto queryLinkDto);
     
     ResponseResult getAllLink();
+    
+    ResponseResult addLink(Link link);
+    
+    ResponseResult getLinkById(Long id);
+    
+    ResponseResult updateLink(Link link);
+    
+    ResponseResult deleteLinks(List<Long> id);
 }

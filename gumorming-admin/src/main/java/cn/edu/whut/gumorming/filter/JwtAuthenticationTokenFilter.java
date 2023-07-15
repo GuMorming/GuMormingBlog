@@ -1,9 +1,9 @@
 package cn.edu.whut.gumorming.filter;
 
-import cn.edu.whut.gumorming.constants.SystemConstants;
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.entity.LoginUser;
-import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
+import cn.edu.whut.gumorming.constants.RedisConstants;
+import cn.edu.whut.gumorming.entity.LoginUser;
+import cn.edu.whut.gumorming.enums.HttpCodeEnum;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.utils.JwtUtil;
 import cn.edu.whut.gumorming.utils.RedisCache;
 import cn.edu.whut.gumorming.utils.WebUtils;
@@ -53,17 +53,17 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             e.printStackTrace();
             // token 超时或非法
             // 响应告诉前端需要重新登录
-            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
+            ResponseResult result = ResponseResult.errorResult(HttpCodeEnum.NEED_LOGIN);
             WebUtils.renderString(response, JSON.toJSONString(result));
             return;
         }
         String userId = claims.getSubject();
         // 从Redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject(SystemConstants.REDIS_KEY_PREFIX_ADMIN_LOGIN + userId);
+        LoginUser loginUser = (LoginUser) redisCache.getCacheObject(RedisConstants.ADMIN_LOGIN_PREFIX + userId);
         // 如果获取不到
         if (Objects.isNull(loginUser)) {
             // 登录过期，提示重新登录
-            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
+            ResponseResult result = ResponseResult.errorResult(HttpCodeEnum.NEED_LOGIN);
             WebUtils.renderString(response, JSON.toJSONString(result));
             return;
         }

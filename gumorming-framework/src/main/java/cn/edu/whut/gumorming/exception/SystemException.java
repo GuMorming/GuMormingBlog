@@ -1,6 +1,6 @@
 package cn.edu.whut.gumorming.exception;
 
-import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
+import cn.edu.whut.gumorming.enums.HttpCodeEnum;
 
 /**
  * @author : GuMorming
@@ -24,7 +24,7 @@ public class SystemException extends RuntimeException {
         return msg;
     }
     
-    public SystemException(AppHttpCodeEnum httpCodeEnum) {
+    public SystemException(HttpCodeEnum httpCodeEnum) {
         super(httpCodeEnum.getMsg());
         this.code = httpCodeEnum.getCode();
         this.msg = httpCodeEnum.getMsg();

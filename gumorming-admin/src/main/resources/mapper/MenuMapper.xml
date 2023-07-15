@@ -8,18 +8,18 @@
                  LEFT JOIN `sys_menu` m ON m.`id` = rm.`menu_id`
         WHERE ur.`user_id` = #{userId}
           AND m.`menu_type` IN ('C', 'F')
-          AND m.`status` = 0
-          AND m.`del_flag` = 0
+          AND m.`is_disable` = 0
+          AND m.`is_delete` = 0
     </select>
 
-    <select id="selectAllRouterMenu" resultType="cn.edu.whut.gumorming.domain.entity.Menu">
+    <select id="selectAllRouterMenu" resultType="cn.edu.whut.gumorming.entity.Menu">
         SELECT DISTINCT m.id,
                         m.parent_id,
                         m.menu_name,
                         m.path,
                         m.component,
                         m.visible,
-                        m.status,
+                        m.is_disable,
                         IFNULL(m.perms, '') AS perms,
                         m.is_frame,
                         m.menu_type,
@@ -28,19 +28,19 @@
                         m.create_time
         FROM `sys_menu` m
         WHERE m.`menu_type` IN ('C', 'M')
-          AND m.`status` = 0
-          AND m.`del_flag` = 0
+          AND m.`is_disable` = 0
+          AND m.`is_delete` = 0
         ORDER BY m.parent_id, m.order_num
     </select>
 
-    <select id="selectRouterMenuTreeByUserId" resultType="cn.edu.whut.gumorming.domain.entity.Menu">
+    <select id="selectRouterMenuTreeByUserId" resultType="cn.edu.whut.gumorming.entity.Menu">
         SELECT DISTINCT m.id,
                         m.parent_id,
                         m.menu_name,
                         m.path,
                         m.component,
                         m.visible,
-                        m.status,
+                        m.is_disable,
                         IFNULL(m.perms, '') AS perms,
                         m.is_frame,
                         m.menu_type,
@@ -52,8 +52,8 @@
                  LEFT JOIN `sys_menu` m ON m.`id` = rm.`menu_id`
         WHERE ur.`user_id` = #{userId}
           AND m.`menu_type` IN ('C', 'M')
-          AND m.`status` = 0
-          AND m.`del_flag` = 0
+          AND m.`is_disable` = 0
+          AND m.`is_delete` = 0
         ORDER BY m.parent_id, m.order_num
     </select>
 </mapper>

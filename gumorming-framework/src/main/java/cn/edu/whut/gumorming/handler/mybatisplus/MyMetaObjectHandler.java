@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -27,17 +26,18 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
             e.printStackTrace();
             userId = -1L;//表示是注册
         }
+
 //        this.setFieldValByName("createTime", new Date(), metaObject);
-        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+        this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
 
 //        this.setFieldValByName("createBy", userId, metaObject);
-        this.strictInsertFill(metaObject, "createBy", Long.class, userId);
+//        this.strictInsertFill(metaObject, "createBy", Long.class, userId);
 
 //        this.setFieldValByName("updateTime", new Date(), metaObject);
-        this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+        this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
 
 //        this.setFieldValByName("updateBy", userId, metaObject);
-        this.strictInsertFill(metaObject, "updateBy", Long.class, userId);
+//        this.strictInsertFill(metaObject, "updateBy", Long.class, userId);
     }
     
     /**
@@ -47,7 +47,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("updateTime", new Date(), metaObject);
-        this.setFieldValByName("updateBy", SecurityUtils.getUserId(), metaObject);
+        this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
+//        this.strictInsertFill(metaObject, "updateBy", Long.class, SecurityUtils.getUserId());
     }
 }

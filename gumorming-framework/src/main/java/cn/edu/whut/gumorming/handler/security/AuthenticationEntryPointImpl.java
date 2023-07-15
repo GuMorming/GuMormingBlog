@@ -1,7 +1,7 @@
 package cn.edu.whut.gumorming.handler.security;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
+import cn.edu.whut.gumorming.enums.HttpCodeEnum;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.utils.WebUtils;
 import com.alibaba.fastjson.JSON;
 import jakarta.servlet.ServletException;
@@ -32,11 +32,11 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         //BadCredentialsException
         ResponseResult result = null;
         if (authException instanceof BadCredentialsException) {
-            result = ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_ERROR.getCode(), authException.getMessage());
+            result = ResponseResult.errorResult(HttpCodeEnum.LOGIN_ERROR.getCode(), authException.getMessage());
         } else if (authException instanceof InsufficientAuthenticationException) {
-            result = ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
+            result = ResponseResult.errorResult(HttpCodeEnum.NEED_LOGIN);
         } else {
-            result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR.getCode(), "认证或授权失败");
+            result = ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR.getCode(), "认证或授权失败");
         }
         //响应给前端
         WebUtils.renderString(response, JSON.toJSONString(result));

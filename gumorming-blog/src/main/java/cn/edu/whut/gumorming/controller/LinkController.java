@@ -1,6 +1,6 @@
 package cn.edu.whut.gumorming.controller;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

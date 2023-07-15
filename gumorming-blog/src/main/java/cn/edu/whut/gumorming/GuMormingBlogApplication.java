@@ -19,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @PropertySource("classpath:application-db.properties")
 @PropertySource("classpath:application-qiniu.properties")
+@PropertySource("classpath:application-mail.properties")
 public class GuMormingBlogApplication {
     public static void main(String[] args) {
         SpringApplication.run(GuMormingBlogApplication.class, args);

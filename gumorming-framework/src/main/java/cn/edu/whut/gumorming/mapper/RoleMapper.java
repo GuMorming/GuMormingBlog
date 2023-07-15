@@ -1,6 +1,6 @@
 package cn.edu.whut.gumorming.mapper;
 
-import cn.edu.whut.gumorming.domain.entity.Role;
+import cn.edu.whut.gumorming.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

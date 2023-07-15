@@ -1,7 +1,7 @@
 package cn.edu.whut.gumorming.service;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.entity.User;
+import cn.edu.whut.gumorming.entity.User;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 
 /**
  * @author : GuMorming

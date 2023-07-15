@@ -1,12 +1,20 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
-import cn.edu.whut.gumorming.domain.ResponseResult;
+import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.article.ArticleSearchVO;
+import cn.edu.whut.gumorming.model.vo.article.BlogArticleVO;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.ArticleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author : GuMorming
@@ -18,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/blog/article")
 @Tag(name = "ArticleController", description = "文章相关接口")
 public class ArticleController {
     @Autowired
@@ -39,26 +47,25 @@ public class ArticleController {
     /**
      * 查询对应分类文章
      *
-     * @param pageNum    当前页数
-     * @param pageSize
-     * @param categoryId
+     * @param current 当前页数
+     * @param size    页面文章数
      * @return ResponseResult
      */
-    @GetMapping("/articleList")
-    public ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId) {
-        return articleService.articleList(pageNum, pageSize, categoryId);
+    @GetMapping("/list")
+    public ResponseResult<PageVo> pageArticleList(Integer current, Integer size) {
+        return articleService.homePageArticleVO(current, size);
     }
     
     @GetMapping("/{id}")
     @SystemLog("获取文章详情")
-    public ResponseResult getArticleDetail(@PathVariable("id") Long id) {
+    public ResponseResult<BlogArticleVO> getArticleDetail(@PathVariable("id") Long id) {
         return articleService.getArticleDetail(id);
     }
     
-    @PutMapping("/updateViewCount/{id}")
-    @SystemLog("更新浏览量")
-    public ResponseResult updateArticleViewCount(@PathVariable("id") Long id) {
-        return articleService.updateArticleViewCount(id);
+    
+    @GetMapping("/search")
+    public ResponseResult<List<ArticleSearchVO>> searchPageArticleVO(String keyword) {
+        return articleService.searchPageArticleVO(keyword);
     }
     
 }

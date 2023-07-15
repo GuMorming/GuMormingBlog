@@ -1,9 +1,9 @@
 package cn.edu.whut.gumorming.service.impl;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
+import cn.edu.whut.gumorming.enums.HttpCodeEnum;
 import cn.edu.whut.gumorming.exception.SystemException;
 import cn.edu.whut.gumorming.service.UploadService;
+import cn.edu.whut.gumorming.utils.FileUtils;
 import cn.edu.whut.gumorming.utils.PathUtils;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -16,6 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -36,19 +37,25 @@ public class OssUploadService implements UploadService {
     String cdnPath;
     
     @Override
-    public ResponseResult uploadImg(MultipartFile img) {
+    public String uploadImg(MultipartFile file) throws IOException {
         // 判断文件类型或文件大小
         // 获取文件名
-        String originalFileName = img.getOriginalFilename();
-        // 判断类型
-        if (!originalFileName.endsWith(".png") && !originalFileName.endsWith(".jpg")) {
-            throw new SystemException(AppHttpCodeEnum.UPDATE_TYPE_ERROR);
+//        String originalFileName = img.getOriginalFilename();
+        // 获取文件md5值
+        String md5 = FileUtils.getMd5(file.getInputStream());
+        // 获取文件扩展名
+        String extName = FileUtils.getExtension(file);
+        // 重新生成文件名
+        String fileName = md5 + "." + extName;
+        // todo blob 判断类型
+        if (!fileName.endsWith(".png") && !fileName.endsWith(".jpg")) {
+            throw new SystemException(HttpCodeEnum.UPDATE_TYPE_ERROR);
         }
         // 若判断通过, 则上传文件到OSS
-        String filePath = PathUtils.generateFilePath(originalFileName);
-        String url = uploadImgToOSS(img, filePath);
+        String filePath = PathUtils.generateFilePath(fileName);
+        String url = uploadImgToOSS(file, filePath);
         
-        return ResponseResult.okResult(url);
+        return url;
     }
     
     /**

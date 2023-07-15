@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.Arrays;
+
 /**
  * @author : GuMorming
  * @Project : GuMormingBlog
@@ -25,6 +27,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 @Slf4j
 public class LogAspect {
+    private static final String[] REQUEST_ARGS_SKIP_URL = {
+            "http://localhost:8989/content/category/export"
+            , "http://localhost:8989/content/tag/export"
+    };
+    
     // 切点
     @Pointcut("@annotation(cn.edu.whut.gumorming.annotation.SystemLog)")
     public void pt() {
@@ -65,8 +72,13 @@ public class LogAspect {
         log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), ((MethodSignature) joinPoint.getSignature()).getName());
         // 打印请求的 IP
         log.info("IP             : {}", request.getRemoteHost());
-        // 打印请求入参
-        log.info("Request Args   : {}", JSON.toJSON(joinPoint.getArgs()));
+        if (Arrays.stream(REQUEST_ARGS_SKIP_URL).anyMatch(url -> url.equals(request.getRequestURL().toString()))) {
+            log.info("Request Args   : null");
+        } else {
+            // 打印请求入参
+            log.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()));
+        }
+        
         
     }
     
@@ -78,6 +90,6 @@ public class LogAspect {
     
     private void handleAfter(Object ret) {
         // 打印出参
-        log.info("Response       : {}", JSON.toJSON(ret));
+        log.info("Response       : {}", JSON.toJSONString(ret));
     }
 }

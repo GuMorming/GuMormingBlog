@@ -1,9 +1,11 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
-import cn.edu.whut.gumorming.constants.SystemConstants;
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.entity.Comment;
+import cn.edu.whut.gumorming.model.dto.comment.AddCommentDTO;
+import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
+import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.reply.ReplyVO;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,24 +19,27 @@ import org.springframework.web.bind.annotation.*;
  * @Description :
  */
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/blog/comment")
 public class CommentController {
     @Autowired
     private CommentService commentService;
     
-    @GetMapping("/commentList")
-    public ResponseResult articleCommentList(Integer pageNum, Integer pageSize, Long articleId) {
-        return commentService.commentList(SystemConstants.COMMENT_TYPE_ARTICLE, pageNum, pageSize, articleId);
+    @GetMapping("/list")
+    public ResponseResult<PageVo> getCommentList(GetParamsDTO getParamsDTO) {
+        return commentService.commentList(getParamsDTO);
     }
     
-    @GetMapping("/linkCommentList")
-    public ResponseResult linkCommentList(Integer pageNum, Integer pageSize) {
-        return commentService.commentList(SystemConstants.COMMENT_TYPE_LINK, pageNum, pageSize, null);
+    @GetMapping("/{commentId}/reply")
+    public ResponseResult<PageVo<ReplyVO>> getCommentReplyVOList(@PathVariable Long commentId, GetParamsDTO getParamsDTO) {
+        return commentService.getPageReplyVOList(commentId, getParamsDTO);
     }
+    
     
     @PostMapping
     @SystemLog("发表评论")
-    public ResponseResult addComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+    public ResponseResult addComment(@RequestBody AddCommentDTO addCommentDTO) {
+        return commentService.addComment(addCommentDTO);
     }
+    
+    
 }

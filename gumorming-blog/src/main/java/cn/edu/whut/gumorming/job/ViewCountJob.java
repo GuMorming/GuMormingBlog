@@ -1,7 +1,7 @@
 package cn.edu.whut.gumorming.job;
 
-import cn.edu.whut.gumorming.constants.SystemConstants;
-import cn.edu.whut.gumorming.domain.entity.Article;
+import cn.edu.whut.gumorming.constants.RedisConstants;
+import cn.edu.whut.gumorming.entity.Article;
 import cn.edu.whut.gumorming.service.ArticleService;
 import cn.edu.whut.gumorming.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,9 @@ public class ViewCountJob {
     // 10 min
     @Scheduled(cron = "0 0/10 * * * ?")
     public void updateViewCountToMySQL() {
+        System.out.println("定时更新文章浏览量");
         // 获取Redis中的浏览量
-        Map<String, Integer> viewCountMap = redisCache.getCacheMap(SystemConstants.REDIS_ARTICLE_VIEWCOUNT);
+        Map<String, Integer> viewCountMap = redisCache.getCacheMap(RedisConstants.ARTICLE_VIEW_COUNT);
         // Map转换为 Article List
         List<Article> articles = viewCountMap.entrySet()
                 .stream()

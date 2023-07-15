@@ -38,13 +38,6 @@ public class SecurityConfig {
     @Autowired
     AccessDeniedHandler accessDeniedHandler;
     
-    private static final String[] SWAGGER_WHITELIST = {
-            "/api/v1/auth/**"
-            , "/v3/api-docs/**"
-            , "/v3/api-docs.yaml"
-            , "/swagger-ui/**"
-            , "/swagger-ui.html"
-    };
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -56,9 +49,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 登录接口 允许匿名访问
                         .requestMatchers("/login").anonymous()
-                        .requestMatchers("/user/userInfo").authenticated()
-                        .requestMatchers("/upload").authenticated()
-                        .requestMatchers("/logout").authenticated()
+                        // 以下请求需要token认证
+//                        .requestMatchers("/code").authenticated() // 发送邮箱验证码
+                        .requestMatchers("/blog/comment/").authenticated() // 发送评论
+                        .requestMatchers("/blog/user/userInfo").authenticated() // 获取用户信息
+                        .requestMatchers("/upload").authenticated() // 上传头像
+                        .requestMatchers("/logout").authenticated() // 登出
                         // 除上面的所有请求不需要认证即可访问
                         .anyRequest().permitAll())
                 .logout(logout -> logout.disable())

@@ -9,21 +9,35 @@ spring:
     url: ${jdbc.url}
     username: ${jdbc.username}
     password: ${jdbc.password}
-
+  # 邮箱配置
+  mail:
+    host: ${mail.163.smtp.host}
+    # 用户名
+    username: ${mail.163.username}
+    # 授权码 outlook不需要
+    password: ${mail.163.smtp.password}
+    # smtp端口
+    port: ${mail.163.smtp.port}
   # 文件上传配置
   servlet:
     multipart:
       max-file-size: 2MB
       max-request-size: 5MB
+oss:
+  accessKey: ${qiniu.ak}
+  secretKey: ${qiniu.sk}
+  bucket: ${qiniu.bucket}
+  cdnPath: ${qiniu.cdnPath}
+
 
 mybatis-plus:
-  #  configuration:
-  #           日志
-  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    #    日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       # 逻辑删除字段名
-      logic-delete-field: delFlag
+      logic-delete-field: isDelete
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: auto
@@ -44,3 +58,7 @@ knife4j:
   setting:
     language: zh_cn
   enable: true
+
+search:
+  # 搜索模式 mysql (elastic)
+  mode: mysql

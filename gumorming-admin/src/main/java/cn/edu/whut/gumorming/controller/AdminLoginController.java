@@ -1,15 +1,15 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.annotation.SystemLog;
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.entity.LoginUser;
-import cn.edu.whut.gumorming.domain.entity.Menu;
-import cn.edu.whut.gumorming.domain.entity.User;
-import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
-import cn.edu.whut.gumorming.domain.vo.AdminUserInfoVo;
-import cn.edu.whut.gumorming.domain.vo.RouterVo;
-import cn.edu.whut.gumorming.domain.vo.UserInfoVo;
+import cn.edu.whut.gumorming.entity.LoginUser;
+import cn.edu.whut.gumorming.entity.Menu;
+import cn.edu.whut.gumorming.entity.User;
+import cn.edu.whut.gumorming.enums.HttpCodeEnum;
 import cn.edu.whut.gumorming.exception.SystemException;
+import cn.edu.whut.gumorming.model.vo.AdminUserInfoVo;
+import cn.edu.whut.gumorming.model.vo.RouterVo;
+import cn.edu.whut.gumorming.model.vo.UserInfoVo;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.service.AdminLoginService;
 import cn.edu.whut.gumorming.service.MenuService;
 import cn.edu.whut.gumorming.service.RoleService;
@@ -45,9 +45,9 @@ public class AdminLoginController {
     @PostMapping("/user/login")
     @SystemLog("后台登录")
     public ResponseResult adminLogin(@RequestBody User user) {
-        if (!StringUtils.hasText(user.getUserName())) {
+        if (!StringUtils.hasText(user.getUsername())) {
             // 异常 必须要传用户名
-            throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
+            throw new SystemException(HttpCodeEnum.REQUIRE_USERNAME);
         }
         return adminLoginService.login(user);
     }

@@ -10,6 +10,13 @@ package cn.edu.whut.gumorming.constants;
  */
 
 public class SystemConstants {
+    public static final Integer FALSE = 0;
+    public static final Integer TRUE = 1;
+    
+    /**
+     * 是否为博客登录
+     */
+    public static boolean IS_BLOG_LOGIN = false;
     /**
      * JWT
      */
@@ -29,25 +36,7 @@ public class SystemConstants {
      * 分类,友链,菜单 是正常状态
      */
     public static final String STATUS_NORMAL = "0";
-    /**
-     * 根评论状态位
-     */
-    public static final long COMMENT_ROOT = -1L;
-    /**
-     * 根评论用户状态位
-     */
-    public static final long COMMENT_ROOT_USER = -1L;
-    /**
-     * 评论类型
-     */
-    public static final String COMMENT_TYPE_ARTICLE = "0";
-    public static final String COMMENT_TYPE_LINK = "1";
-    public static final String REDIS_ARTICLE_VIEWCOUNT = "article:viewCount";
-    /**
-     * Redis KEY 前缀
-     */
-    public static final String REDIS_KEY_PREFIX_ADMIN_LOGIN = "adminlogin:";
-    public static final String REDIS_KEY_PREFIX_BLOG_LOGIN = "bloglogin:";
+    
     /**
      * 菜单类型
      */
@@ -57,4 +46,6 @@ public class SystemConstants {
     public static final String MENU_TYPE_CAIDAN = "C";
     // 按钮
     public static final String MENU_TYPE_BUTTON = "F";
+    
+    public static final String FLAG_ADMIN = "1";
 }

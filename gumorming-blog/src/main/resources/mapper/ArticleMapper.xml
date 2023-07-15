@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.whut.gumorming.mapper.ArticleMapper">
+    <select id="selectLastArticle" resultType="cn.edu.whut.gumorming.model.vo.article.ArticlePaginationVO">
+        SELECT id, article_cover, article_title
+        FROM article
+        WHERE is_delete = 0
+          AND `status` = 1
+          AND id &lt; #{articleId}
+        ORDER BY id DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectNextArticle" resultType="cn.edu.whut.gumorming.model.vo.article.ArticlePaginationVO">
+        SELECT id, article_cover, article_title
+        FROM article
+        WHERE is_delete = 0
+          AND `status` = 1
+          AND id &gt; #{articleId}
+        ORDER BY id ASC
+        LIMIT 1
+    </select>
+    <select id="searchArticle" resultType="cn.edu.whut.gumorming.model.vo.article.ArticleSearchVO">
+        SELECT id,
+        article_title,
+        article_content,
+        is_delete,
+        `status`
+        FROM article
+        <where>
+            is_delete = 0 and `status` = 1
+            <if test="keyword!=null">
+                and (article_title like concat('%',#{keyword},'%')
+                or article_content like concat('%',#{keyword},'%'))
+            </if>
+        </where>
+    </select>
+</mapper>

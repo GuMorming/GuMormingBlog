@@ -1,6 +1,6 @@
 package cn.edu.whut.gumorming.utils;
 
-import cn.edu.whut.gumorming.domain.entity.LoginUser;
+import cn.edu.whut.gumorming.entity.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

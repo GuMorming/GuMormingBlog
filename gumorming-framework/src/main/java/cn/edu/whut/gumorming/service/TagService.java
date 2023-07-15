@@ -1,10 +1,13 @@
 package cn.edu.whut.gumorming.service;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.dto.TagListDto;
-import cn.edu.whut.gumorming.domain.entity.Tag;
-import cn.edu.whut.gumorming.domain.vo.PageVo;
+import cn.edu.whut.gumorming.entity.Tag;
+import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
+import cn.edu.whut.gumorming.model.vo.PageVo;
+import cn.edu.whut.gumorming.model.vo.article.ArticleCardVO;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 
 /**
@@ -15,7 +18,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TagService extends IService<Tag> {
     
-    ResponseResult<PageVo> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto);
+    ResponseResult<PageVo> pageTagList(GetParamsDTO getParamsDTO);
     
     ResponseResult addTag(Tag tag);
+    
+    ResponseResult deleteTag(List<Long> id);
+    
+    ResponseResult getTagInfoById(Long id);
+    
+    ResponseResult updateTagInfoById(Tag tag);
+    
+    ResponseResult getTagList();
+    
+    ResponseResult<PageVo<ArticleCardVO>> getTagArticleList(GetParamsDTO getParamsDTO);
 }

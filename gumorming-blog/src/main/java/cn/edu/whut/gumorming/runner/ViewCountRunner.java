@@ -1,7 +1,8 @@
 package cn.edu.whut.gumorming.runner;
 
+import cn.edu.whut.gumorming.constants.RedisConstants;
 import cn.edu.whut.gumorming.constants.SystemConstants;
-import cn.edu.whut.gumorming.domain.entity.Article;
+import cn.edu.whut.gumorming.entity.Article;
 import cn.edu.whut.gumorming.mapper.ArticleMapper;
 import cn.edu.whut.gumorming.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,14 @@ public class ViewCountRunner implements CommandLineRunner {
     private RedisCache redisCache;
     
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
+        // 启动时将博客登录状态置为 true
+        SystemConstants.IS_BLOG_LOGIN = true;
         // 查询博客信息 id viewCount
         List<Article> articles = articleMapper.selectList(null);
         Map<String, Integer> viewCountMap = articles.stream()
                 .collect(Collectors.toMap(article -> article.getId().toString(), article -> article.getViewCount().intValue()));
         // 存储到Redis中
-        redisCache.setCacheMap(SystemConstants.REDIS_ARTICLE_VIEWCOUNT, viewCountMap);
+        redisCache.setCacheMap(RedisConstants.ARTICLE_VIEW_COUNT, viewCountMap);
     }
 }

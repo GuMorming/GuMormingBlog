@@ -1,8 +1,8 @@
 package cn.edu.whut.gumorming.handler.exception;
 
-import cn.edu.whut.gumorming.domain.ResponseResult;
-import cn.edu.whut.gumorming.domain.enums.AppHttpCodeEnum;
+import cn.edu.whut.gumorming.enums.HttpCodeEnum;
 import cn.edu.whut.gumorming.exception.SystemException;
+import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -36,6 +36,6 @@ public class GlobalExceptionHandler {
         // 打印异常信息
         log.error("异常! {}", e);
         // 从异常对象获取提示信息, 封装返回
-        return ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 }
