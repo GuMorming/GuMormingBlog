@@ -1,17 +1,15 @@
 package cn.edu.whut.gumorming.controller;
 
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
-import cn.edu.whut.gumorming.model.vo.TagVo;
 import cn.edu.whut.gumorming.model.vo.article.ArticleCardVO;
 import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
+import cn.edu.whut.gumorming.model.vo.tag.TagVO;
 import cn.edu.whut.gumorming.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author : GuMorming
@@ -28,8 +26,8 @@ public class TagController {
     TagService tagService;
     
     @GetMapping("/list")
-    public ResponseResult<List<TagVo>> getTagVOList() {
-        return tagService.getTagList();
+    public ResponseResult<PageVo<TagVO>> getPageTagVOList() {
+        return tagService.getPageTagList();
     }
     
     @GetMapping("/article")

@@ -148,4 +148,19 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         
         return ResponseResult.okResult(new PageVo<>(articleCardVOS, page.getTotal()));
     }
+    
+    @Override
+    public ResponseResult<PageVo<TagVO>> getPageTagList() {
+        List<Long> tagIds = articleTagService.list().stream()
+                .map(ArticleTag::getTagId).toList();
+        List<Tag> tags = list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
+        
+        List<TagVO> tagVOS = BeanCopyUtils.copyBeanList(tags, TagVO.class);
+        // 获取对应标签下的文章数量
+        for (TagVO tagVO : tagVOS) {
+            tagVO.setArticleCount((int) articleTagService.count(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getTagId, tagVO.getId())));
+        }
+        
+        return ResponseResult.okResult(new PageVo<>(tagVOS, (long) tagVOS.size()));
+    }
 }

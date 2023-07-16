@@ -5,6 +5,7 @@ import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
 import cn.edu.whut.gumorming.model.vo.article.ArticleCardVO;
 import cn.edu.whut.gumorming.model.vo.response.PageVo;
 import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
+import cn.edu.whut.gumorming.model.vo.tag.TagVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -31,4 +32,6 @@ public interface TagService extends IService<Tag> {
     ResponseResult getTagList();
     
     ResponseResult<PageVo<ArticleCardVO>> getTagArticleList(GetParamsDTO getParamsDTO);
+    
+    ResponseResult<PageVo<TagVO>> getPageTagList();
 }

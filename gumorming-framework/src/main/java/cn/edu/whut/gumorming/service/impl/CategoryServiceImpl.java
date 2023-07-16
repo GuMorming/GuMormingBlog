@@ -70,6 +70,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         Page<Article> page = new Page<>(getParamsDTO.getCurrent(), getParamsDTO.getSize());
         articleService.page(page, articleQueryWrapper);
         List<Article> articles = page.getRecords();
+        String categoryName = getById(getParamsDTO.getCategoryId()).getCategoryName();
         // 封装首页文章VO
         List<ArticleCardVO> articleCardVOS = BeanCopyUtils.copyBeanList(articles, ArticleCardVO.class);
         articleCardVOS = articleService.setCategoryAndTags(articleCardVOS);
