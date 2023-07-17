@@ -1,6 +1,5 @@
 package cn.edu.whut.gumorming.controller;
 
-import cn.edu.whut.gumorming.annotation.SystemLog;
 import cn.edu.whut.gumorming.entity.Category;
 import cn.edu.whut.gumorming.model.dto.category.AdminUpdateCategoryDTO;
 import cn.edu.whut.gumorming.model.dto.params.GetParamsDTO;
@@ -30,7 +29,7 @@ public class CategoryController {
     CategoryService categoryService;
     
     @GetMapping("/list")
-    @SystemLog("后台获取分类列表")
+//    @SystemLog("后台获取分类列表")
     public ResponseResult<PageVo> getPageCategoryList(GetParamsDTO getParamsDTO) {
         return categoryService.pageCategoryList(getParamsDTO);
     }
@@ -42,13 +41,12 @@ public class CategoryController {
     
     
     @GetMapping("/listAllCategory")
-    @SystemLog("后台写文章时获取所有分类")
+//    @SystemLog("后台写文章时获取所有分类")
     public ResponseResult listAllCategory() {
         return categoryService.getCategoryList();
     }
     
     @GetMapping("/export")
-    @SystemLog("后台导出分类Excel")
     @PreAuthorize("@permissionService.hasPermission('content:category:export')")
     public void exportCategory2Excel(HttpServletResponse response) throws IOException {
         categoryService.export2Excel(response);

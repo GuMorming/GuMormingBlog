@@ -21,4 +21,6 @@ public interface BlogLoginService {
     ResponseResult<?> sendCode(String username);
     
     ResponseResult register(RegisterDTO registerDTO);
+    
+    ResponseResult forgetPassword(RegisterDTO registerDTO);
 }

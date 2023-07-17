@@ -10,6 +10,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @Description :
  */
 @Configuration
-public class SecurityConfig {
+public class BlogSecurityConfig {
     
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -43,14 +44,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 //关闭csrf
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 //不通过Session获取SecurityContext
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // 登录接口 允许匿名访问
                         .requestMatchers("/login").anonymous()
                         // 以下请求需要token认证
-//                        .requestMatchers("/code").authenticated() // 发送邮箱验证码
                         .requestMatchers("/blog/comment/").authenticated() // 发送评论
                         .requestMatchers("/blog/user/userInfo").authenticated() // 获取用户信息
                         .requestMatchers("/upload").authenticated() // 上传头像

@@ -78,6 +78,9 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         // 获取userid生产token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
+        if (userService.getById(Long.parseLong(userId)).getIsDisable().equals(SystemConstants.TRUE)) {
+            return ResponseResult.errorResult(HttpCodeEnum.USER_IS_DISABLE);
+        }
         String jwt = JwtUtil.createJWT(userId);
         // 用户信息存入redis
         redisCache.setCacheObject(RedisConstants.BLOG_LOGIN_PREFIX + userId, loginUser);
@@ -116,8 +119,6 @@ public class BlogLoginServiceImpl implements BlogLoginService {
             return ResponseResult.errorResult(HttpCodeEnum.REGISTER_EMAIL_NULL);
         } else if (!isEmailValid(username)) {
             return ResponseResult.errorResult(HttpCodeEnum.REGISTER_EMAIL_VALID);
-        } else if (isEmailExist(username)) {
-            return ResponseResult.errorResult(HttpCodeEnum.EMAIL_EXIST);
         }
         // 生成6位随机验证码
         RandomGenerator randomGenerator = new RandomGenerator("0123456789", 6);
@@ -171,6 +172,37 @@ public class BlogLoginServiceImpl implements BlogLoginService {
                 .roleId(RoleEnum.USER.getRoleId())
                 .build();
         userRoleService.save(userRole);
+        
+        return ResponseResult.okResult();
+    }
+    
+    @Override
+    public ResponseResult forgetPassword(RegisterDTO registerDTO) {
+        // 1.校验
+        // 用户名
+        if (!StringUtils.hasText(registerDTO.getUsername())) {
+            return ResponseResult.errorResult(HttpCodeEnum.REGISTER_USERNAME_NULL);
+        }
+        // 验证码
+        String code = redisCache.getCacheObject(RedisConstants.CODE_KEY + registerDTO.getUsername());
+        if (!code.equals(registerDTO.getCode())) {
+            return ResponseResult.errorResult(HttpCodeEnum.EMAIL_CODE_INVALID);
+        }
+        // 邮箱
+        if (!isEmailValid(registerDTO.getUsername())) {
+            return ResponseResult.errorResult(HttpCodeEnum.REGISTER_EMAIL_VALID);
+        } else if (!isEmailExist(registerDTO.getUsername())) {
+            return ResponseResult.errorResult(HttpCodeEnum.EMAIL_EXIST.getCode(), "邮箱不存在");
+        }
+        // 2.更新密码
+        User user = User.builder()
+                .username(registerDTO.getUsername())
+                .password(passwordEncoder.encode(registerDTO.getPassword()))
+                .build();
+        Long id = userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, user.getUsername())).getId();
+        user.setId(id);
+        
+        userService.updateById(user);
         
         return ResponseResult.okResult();
     }

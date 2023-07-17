@@ -21,7 +21,7 @@ import java.util.Date;
 public class ExcelCategoryVO {
     @ExcelProperty("分类名")
     private String categoryName;
-    @ExcelProperty("状态: 0正常;1删除")
+    @ExcelProperty("状态: 0正常;1停用")
     private Integer isDisable;
     
     @ExcelProperty("创建时间")

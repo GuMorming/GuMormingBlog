@@ -1,5 +1,5 @@
 server:
-  port: ${ADMIN_PORT:8989}
+  port: ${ADMIN_PORT:8888}
 
 spring:
   application:
@@ -49,10 +49,7 @@ springdoc:
     operations-sorter: alpha
   api-docs:
     path: /v3/api-docs
-  group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: cn.edu.whut.gumorming
+
 
 knife4j:
   setting:

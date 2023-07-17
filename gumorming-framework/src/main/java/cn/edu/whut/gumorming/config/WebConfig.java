@@ -32,6 +32,22 @@ public class WebConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
     
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        //需要追加byte，否则springdoc-openapi接口会响应Base64编码内容，导致接口文档显示失败
+        // https://github.com/springdoc/springdoc-openapi/issues/2143
+        // 解决方案
+//        converters.add(fastJsonHttpMessageConverter());
+        converters.add(new ByteArrayHttpMessageConverter());
+        
+    }
+    
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(fastJsonHttpMessageConverter());
+//        converters.add(new ByteArrayHttpMessageConverter());
+    }
+    
     
     @Bean
     public FastJsonHttpMessageConverter fastJsonHttpMessageConverter() {
@@ -57,25 +73,4 @@ public class WebConfig implements WebMvcConfigurer {
         
         return fastConverter;
     }
-    
-    @Bean
-    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
-        return new ByteArrayHttpMessageConverter();
-    }
-    
-    
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        //需要追加byte，否则springdoc-openapi接口会响应Base64编码内容，导致接口文档显示失败
-        // https://github.com/springdoc/springdoc-openapi/issues/2143
-        // 解决方案
-        converters.add(byteArrayHttpMessageConverter());
-    }
-    
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(fastJsonHttpMessageConverter());
-    }
-    
-    
 }

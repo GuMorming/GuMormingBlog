@@ -4,6 +4,7 @@ import cn.edu.whut.gumorming.constants.RedisConstants;
 import cn.edu.whut.gumorming.constants.SystemConstants;
 import cn.edu.whut.gumorming.entity.Article;
 import cn.edu.whut.gumorming.entity.ArticleTag;
+import cn.edu.whut.gumorming.entity.SiteConfig;
 import cn.edu.whut.gumorming.entity.Tag;
 import cn.edu.whut.gumorming.enums.ArticleStatusEnum;
 import cn.edu.whut.gumorming.enums.HttpCodeEnum;
@@ -20,6 +21,7 @@ import cn.edu.whut.gumorming.model.vo.response.ResponseResult;
 import cn.edu.whut.gumorming.model.vo.tag.TagOptionVO;
 import cn.edu.whut.gumorming.service.ArticleService;
 import cn.edu.whut.gumorming.service.ArticleTagService;
+import cn.edu.whut.gumorming.service.SiteConfigService;
 import cn.edu.whut.gumorming.strategy.context.SearchStrategyContext;
 import cn.edu.whut.gumorming.utils.BeanCopyUtils;
 import cn.edu.whut.gumorming.utils.RedisCache;
@@ -55,6 +57,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private ArticleTagService articleTagService;
     @Autowired
     private TagMapper tagMapper;
+    @Autowired
+    private SiteConfigService siteConfigService;
     @Autowired
     private SearchStrategyContext searchStrategyContext;
     
@@ -165,6 +169,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (Objects.isNull(article.getCategoryId())) {
             return ResponseResult.errorResult(HttpCodeEnum.REQUIRE_CATEGORY);
         }
+        if (!StringUtils.hasText(adminAddArticleDTO.getArticleCover())) {
+            SiteConfig siteConfig = siteConfigService.getSiteConfig();
+            article.setArticleCover(siteConfig.getArticleCover());
+            System.out.println(article.getArticleCover());
+        }
+        
         save(article);
         // 添加 文章和标签 的关联
         List<ArticleTag> articleTags = adminAddArticleDTO.getTagIds().stream()

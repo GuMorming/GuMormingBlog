@@ -10,10 +10,7 @@ import cn.edu.whut.gumorming.service.BlogLoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : GuMorming
@@ -48,6 +45,11 @@ public class BlogLoginController {
     @GetMapping("/code")
     public ResponseResult<?> sendCode(String username) {
         return blogLoginService.sendCode(username);
+    }
+    
+    @PutMapping("/forget")
+    public ResponseResult forgetPassword(@RequestBody RegisterDTO registerDTO) {
+        return blogLoginService.forgetPassword(registerDTO);
     }
     
     @PostMapping("/register")

@@ -47,7 +47,7 @@ public class AdminSecurityConfig {
             , "/swagger-ui/**"
             , "/swagger-ui.html"
     };
-    private final String[] KNIFE4J_WHITELIST = {
+    private static final String[] KNIFE4J_WHITELIST = {
             "/webjars/"
             , "/webjars/**"
             , "/doc.html/"
