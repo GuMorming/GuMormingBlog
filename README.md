@@ -1,5 +1,8 @@
 # GuMorming Blog
 
+## 项目技术栈
+后端: SpringBoot SpringSecurity MybatisPlus Redis
+前端: Vue Vue-Admin-Template Vue-Router 
 ## 项目参考
 
 博客前台前端参考:
@@ -17,4 +20,3 @@
 [BiliBili-三更草堂](https://space.bilibili.com/663528522/?spm_id_from=333.999.0.0),
 [SpringBoot+Vue项目实战](https://www.bilibili.com/video/BV1hq4y1F7zk/?spm_id_from=333.999.0.0)
 
-## 项目技术栈
