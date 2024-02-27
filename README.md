@@ -1,7 +1,16 @@
 # GuMorming Blog
-
+## 后台管理页面展示
+![](img/admin/1.png)
+![](img/admin/2.png)
+![](img/admin/3.png)
+![](img/admin/4.png)
+![](img/admin/5.png)
+![](img/admin/6.png)
+![](img/admin/7.png)
+![](img/admin/8.png)
 ## 项目技术栈
 后端: SpringBoot SpringSecurity MybatisPlus Redis
+
 前端: Vue Vue-Admin-Template Vue-Router 
 ## 项目参考
 
